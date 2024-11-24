@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+       
+    </style>
+</head>
+<body>
+    <div id="cart"></div>
+    <button id="backtoHome">Home</button>
+
+    <script>
+         
+    
+
+ document.addEventListener("DOMContentLoaded", () => {
+  const cartContainer = document.getElementById("cart");
+  const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log(cartData);
+  
+  if (cartData.length === 0) {
+    cartContainer.innerHTML = "<h3>Your cart is empty.</h3>";
+    return;
+  }
+
+  cartData.forEach((x) => {
+    if (x) {
+      cartContainer.innerHTML += 
+       `<div id="card">
+        <img src="${x.image}">
+        <h3 style="text-align:center;font-size:0.7rem;height:25%; margin-top:1%">${x.Brand}</h3>
+        <h3 style="text-align:center;font-size:0.9rem;font-weight:bold;margin-top:1%">Price: $${x.Price}</h3>
+        <button class="btn btn-danger" onclick="removeFromCart('${x.Image}')">Remove</button>
+        <button class="btn btn-danger" style="margin-top:1%" onclick="buyNow('${x.Brand}','${x.Price}','${x.Image}')">Buy Now</button>
+      </div>`;
+     }
+     });
+    })
+
+    let backtoHome=document.getElementById("backtoHome");
+    backtoHome.addEventListener("click",()=>{
+        window.location.href="index.html"
+    })
+    </script>
+
+    <script src="Electronics.js"></script>
+</body>
+</html>
